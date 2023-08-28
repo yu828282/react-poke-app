@@ -81,7 +81,7 @@ module.exports = {
 ```npm install -D tailwind-scrollbar```
 
 ## react router dom 설치
-``` ```
+```npm install react-router-dom --save```
 ### BrowserRouter 
 - ul를 url과 동기화된 상태로 유지
 
