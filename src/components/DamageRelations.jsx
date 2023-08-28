@@ -125,7 +125,7 @@ const filterDamageRelations = (valueFilter, damage) => {
           {Object.entries(damagePokemonForm).map(([keyName, value]) => {
             const key = keyName;
             const valuesOfKeyName = {
-              double_damage: 'Weak', half_damage: 'Resistant', no_damage: 'Immune'
+              double_damage: '약점 (Weak)', half_damage: '저항 (Resistant)', no_damage: '면역 (Immune)'
               }
               return (
                 <div key={key}>

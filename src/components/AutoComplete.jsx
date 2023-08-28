@@ -1,25 +1,33 @@
 import React, {useState}  from 'react'
+import koList from '../json/koList.json'
 
 const AutoComplete = ({allPokemons, setDisplayedPokemons}) => {
+
   
   const [searchTerm, setSearchTerm] = useState(''); //검색기능
 
+  const totalList = koList
+
   const filterNames = (input) => {
+    return input ? totalList.filter((e) => e.ko_name.includes(input)) : [];
+  }
+  
+  const enFilterNames = (input) => {
     const value = input.toLowerCase(); // 소문자 변경
     return value ? allPokemons.filter((e) => e.name.includes(value)) : []; //인풋이 포함되는 값 리턴
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     let text = searchTerm.trim(); //문자열 좌우공백을 제거
-    setDisplayedPokemons(filterNames(text));
+    setDisplayedPokemons(enFilterNames(text));
+    // console.log(enFilterNames(text))
     setSearchTerm('');
   }
 
   const checkEqualName = (input) => {
     const filteredArray = filterNames(input);
-    return filteredArray[0]?.name === input ? [] : filteredArray; //첫번째 배열이름이 인풋과 같으면 빈 배열을 넣기
+    return filteredArray[0]?.ko_name === input ? [] : filteredArray; //첫번째 배열이름이 인풋과 같으면 빈 배열을 넣기
   }
 
   return (    
@@ -48,9 +56,9 @@ const AutoComplete = ({allPokemons, setDisplayedPokemons}) => {
        {checkEqualName(searchTerm).map((e, i) => (
         <li key={`button-${i}`}>
           <button
-            onClick={() => setSearchTerm(e.name)}
+            onClick={() =>  setSearchTerm(e.en_name) }
             className={`text-base w-full hover:bg-gray-600 p-[2px] text-gray-100`}
-          >{e.name}
+          >{e.ko_name}
         </button>
         </li>
        ))} 

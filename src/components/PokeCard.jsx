@@ -6,17 +6,17 @@ import { Link } from 'react-router-dom';
 const PokeCard = ({url, name}) => {
   const [pokemon, setPokemon] = useState();
   const [koname, setKoname] = useState();
-
+  
   useEffect(()=> {
     fetchPokeDetailData();
-  }, [])
+  }, []) 
+  
 
   async function fetchPokeDetailData() {
     try{
       const response = await axios.get(url);
       const koResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${response.data.id}`);
       const koName = koResponse.data.names.find(name => name.language.name === 'ko')
-      // console.log(koName.name)
       setKoname(koName.name)
       const pokemonData = formatPokemonData(response.data);
       setPokemon(pokemonData);

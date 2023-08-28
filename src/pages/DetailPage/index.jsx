@@ -71,7 +71,7 @@ const DetailPage = () => {
         const getPokemonDescription = async (id) => {
           const url = `https://pokeapi.co/api/v2/pokemon-species/${id}/`
           const { data : pokemonSpecies} = await axios.get(url)
-          console.log(pokemonSpecies)
+          // console.log(pokemonSpecies)
 
           const descriptions = filterAndFormatDescription(pokemonSpecies.flavor_text_entries)
 
@@ -89,6 +89,7 @@ const DetailPage = () => {
           const url = `https://pokeapi.co/api/v2/pokemon-species/${id}/`
           const { data : pokemonSpecies} = await axios.get(url)
           const koname = filterKoname(pokemonSpecies.names)[0].name
+          console.log(pokemonSpecies)
           return koname
         }
 
@@ -183,7 +184,7 @@ const DetailPage = () => {
                         <ArrowLeft className='w-6 h-8 text-zinc-200' />
                     </Link>
                     <h1 className='text-zinc-200 font-bold text-xl capitalize'>
-                        {pokemon.name}
+                        {pokemon.name} ({pokemon.koname})
                     </h1>
                 </div>
                 <div className='text-zinc-200 font-bold text-md'>
@@ -213,7 +214,7 @@ const DetailPage = () => {
                       <Type key={type} type={type} />
                   ))}
               </div>
-              <h2 className={`text-base font-semibold ${text}`}> 정보
+              <h2 className={`text-base font-semibold ${text} pt-4`}> 정보
               </h2>
               <div className='flex w-full items-center justify-between max-w-[400px] text-center'>
                   <div className='w-full'>
@@ -231,13 +232,13 @@ const DetailPage = () => {
                       </div>
                   </div>
                   <div className='w-full'>
-                      <h4 className='text-[0.5rem] text-zinc-100'>Weight</h4>
+                      <h4 className='text-[0.5rem] text-zinc-100'>abilities</h4>
                       {pokemon.abilities.map((ability) => (
                           <div key={ability} className="text-[0.5rem] text-zinc-100 capitalize"> {ability}</div>
                       ))}
                   </div>
               </div>
-              <h2 className={`text-base font-semibold ${text}`}>
+              <h2 className={`text-base font-semibold ${text} pt-4`}>
                   기본 능력치
               </h2>
               <div className='w-auto'>
@@ -254,7 +255,7 @@ const DetailPage = () => {
                       </tbody>
                   </table>
               </div>
-              <h2 className={`text-base font-semibold ${text}`}>
+              <h2 className={`text-base font-semibold ${text} pt-4`}>
                 데미지 정보
               </h2>
               {pokemon.DamageRelations && (
@@ -264,8 +265,8 @@ const DetailPage = () => {
                   </h2>
                 </div>
               )}              
-              <h2 className={`text-base font-semibold ${text}`}>설명</h2>
-                <p className='text-md leading-4 font-sans text-zinc-200 max-w-[30rem] text-center'>
+              <h2 className={`text-base font-semibold ${text} pt-4`}>설명</h2>
+                <p className='text-md leading-5 font-sans text-zinc-200 max-w-[30rem] text-center'>
                     {pokemon.description}
                 </p>
                 <div className='flex my-8 flex-wrap justify-center'>

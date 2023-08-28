@@ -16,6 +16,7 @@ function MainPage() {
   const limitNum = 20; //한번에 보여줄 포켓몬 수
   const url = `https://pokeapi.co/api/v2/pokemon/?limit=1080&offset=0`;
 
+
   // const debouncedSearchTerm = useDebounce(searchTerm,500);
 
   useEffect(()=> {
@@ -42,7 +43,16 @@ function MainPage() {
       // const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offsetValue}`)   
       // setPokemons(response.data.results);
       // setPokemons([...pokemons, ...response.data.results]);
-      // setOffset(offsetValue)      
+      // setOffset(offsetValue)    
+  
+      // for (let i = 1001; i <= 1010; i++) { //
+      //   const speciesResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${i}`);
+      //   const kornName = speciesResponse.data.names.find(name => name.language.name === 'ko');
+      //   const engName = speciesResponse.data.names.find(name => name.language.name === 'en');
+      //   allPokemonData.push({ en_name : engName.name, ko_name: kornName.name });
+      // }
+      // setPokemonData(allPokemonData);  
+      // console.log(allPokemonData)
 
     }catch(error){
       console.error(error);
@@ -69,11 +79,11 @@ function MainPage() {
   // }
 
   return (
-    <article className='pt-6'>
+    <article className='pt-20'>
       <header className='flex flex-col gap-2 w-full px-4 z-50'>
         <AutoComplete allPokemons={allPokemons} setDisplayedPokemons={setDisplayedPokemons}></AutoComplete>
       </header>
-      <section className='pt-6 flex flex-col justify-content items-center overflow-auto z-0'>
+      <section className='py-10 flex flex-col justify-content items-center overflow-auto z-0'>
         <div className='flex flex-row flex-wrap gap-[16px] items-center justify-center px-2 max-w-4xl '>
           {displayedPokemons.length > 0 ? (
             // pokemons.map((pokemon, index) => (<div key={index} ><img src={pokemon.sprites.front_default} alt={pokemon.korean_name} /><p>{pokemon.korean_name}</p><p>No: {pokemon.id}</p></div>
@@ -87,7 +97,7 @@ function MainPage() {
             )}
         </div>
       </section>
-      <div className='text-center'>
+      <div className='text-center pb-40'>
         {(allPokemons.length > displayedPokemons.length) && (displayedPokemons.length !==1)&&
          (<button 
             onClick={()=>setDisplayedPokemons(filterDisabledPokemonData(allPokemons, displayedPokemons))}//fetchPokeData(false)}
@@ -96,7 +106,7 @@ function MainPage() {
           </button>)
         }
       </div>
-    </article>
+    </article>    
   )
 }
 
